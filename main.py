@@ -16,17 +16,18 @@ SCOPES = ["https://www.googleapis.com/auth/gmail.send"]
 
 SENDER_EMAIL = "djangogirlscolombia@gmail.com"
 
-WORKSHOP_DATE = "20 de julio de 2024"
-WORKSHOP_TIME = "9:00 a.m. - 5:00 p.m."
-WORKSHOP_PLACE = "Bogotá, Colombia"
-MENTOR_MEETING_DATE = "15 de julio de 2024"
-MENTOR_MEETING_TIME = "6:00 p.m. - 7:00 p.m."
-WORKSHOP_DAY_MENTOR_MEETING_TIME = "12:00 p.m."
-MENTOR_CONFIRMATION_DEADLINE = "30 de junio de 2024"
-PARTICIPANT_CONFIRMATION_DEADLINE = "5 de julio de 2024"
-PARTICIPANT_CONFIRMATION_DATE = "10 de julio de 2024"
-MENTOR_CONFIRMATION_DATE = "5 de julio de 2024"
-WORKSHOP_YEAR = "2024"
+# Workshop details constants
+WORKSHOP_DATE = "28 de marzo de 2026"
+WORKSHOP_TIME = "9:00 a.m. - 4:00 p.m."
+WORKSHOP_PLACE = "Evento Virtual"
+MENTOR_MEETING_DATE = "15 de julio de 2024" # Date to meet with mentors before the workshop
+MENTOR_MEETING_TIME = "6:00 p.m. - 7:00 p.m." # Time for mentor meeting on the workshop day (e.g. for final instructions, Q&A, etc.)
+WORKSHOP_DAY_MENTOR_MEETING_TIME = "12:00 p.m." # Time for mentor meeting on the workshop day (e.g. for final instructions, Q&A, etc.)
+MENTOR_CONFIRMATION_DEADLINE = "30 de junio de 2024" # Deadline for mentors to confirm their participation before we finalize the list of accepted mentors and send out acceptance emails to participants
+PARTICIPANT_CONFIRMATION_DEADLINE = "5 de julio de 2024" # Deadline for participants to confirm their participation before we finalize the list of accepted participants and send out acceptance emails to mentors
+PARTICIPANT_CONFIRMATION_DATE = "10 de julio de 2024" # Date when we will send acceptance emails to participants after confirming the final list of accepted mentors
+MENTOR_CONFIRMATION_DATE = "5 de julio de 2024" # Date when we will send acceptance emails to mentors after confirming the final list of accepted mentors
+WORKSHOP_YEAR = "2026" # Year of the workshop, used in email templates and certificate generation
 
 # Email configuration constants
 DEFAULT_SUBJECT = "Django Girls Colombia - Información del Taller"
