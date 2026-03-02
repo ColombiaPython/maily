@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #f4f4f4;
+    }
+    table {
+      border-spacing: 0;
+      border-collapse: collapse;
+    }
+    img {
+      border: 0;
+      display: block;
+    }
+  </style>
+</head>
+<body style="margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; background-color: #f4f4f4;">
+  <!-- Main Container -->
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: #f4f4f4;">
+    <tr>
+      <td align="center" style="padding: 20px 0;">
+        <!-- Email Content Container -->
+        <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="background-color: #ffffff; max-width: 600px;">
+
+          <!-- Header Section: Image -->
+          <tr>
+            <td align="center" style="padding: 0;">
+              <img src="{email_header_url}" alt="Django Girls" style="width: 100%; max-width: 600px; height: auto; display: block;">
+            </td>
+          </tr>
+
+          <!-- Header Section: Title -->
+          <tr>
+            <td align="center" style="padding: 30px 20px 20px 20px; background-color: #ffffff;">
+              <h1 style="margin: 0; font-size: 28px; color: #ff9800; font-weight: bold;">Tu asistencia está en LISTA DE ESPERA</h1>
+            </td>
+          </tr>
+
+          <!-- Greeting Section -->
+          <tr>
+            <td align="center" style="padding: 10px 40px; background-color: #ffffff;">
+              <p style="margin: 0; font-size: 18px; color: #333333; line-height: 1.6;"><strong>¡Hola {participant_name}!</strong></p>
+            </td>
+          </tr>
+
+          <!-- Summary Section -->
+          <tr>
+            <td align="center" style="padding: 20px 40px; background-color: #ffffff;">
+              <p style="margin: 0; font-size: 16px; color: #333333; line-height: 1.6; text-align: center;">
+                Te escribimos para comentarte que tu asistencia está en <strong>LISTA DE ESPERA</strong> para participar en el "<strong>Taller de programación para mujeres Django Girls en Bogotá</strong>".
+              </p>
+            </td>
+          </tr>
+
+          <!-- Event Details Section -->
+          <tr>
+            <td align="center" style="padding: 20px 40px; background-color: #fff8e1;">
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td align="left" style="padding: 8px 0;">
+                    <p style="margin: 0; font-size: 15px; color: #333333; line-height: 1.8;">
+                      <strong>Fecha:</strong> {workshop_date}
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="left" style="padding: 8px 0;">
+                    <p style="margin: 0; font-size: 15px; color: #333333; line-height: 1.8;">
+                      <strong>Hora:</strong> {workshop_time}
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="left" style="padding: 8px 0;">
+                    <p style="margin: 0; font-size: 15px; color: #333333; line-height: 1.8;">
+                      <strong>Web:</strong> <a href="https://djangogirls.org/en/bogota/" style="color: #ff9800; text-decoration: none;">https://djangogirls.org/en/bogota/</a>
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Explanation Section -->
+          <tr>
+            <td align="center" style="padding: 30px 40px 20px 40px; background-color: #ffffff;">
+              <p style="margin: 0; font-size: 15px; color: #333333; line-height: 1.8; text-align: center;">
+                Debido a que sobrepasamos el número de inscritos disponibles para el lugar, se hizo una selección basada en los formularios de registro y has quedado en lista de espera.
+              </p>
+            </td>
+          </tr>
+
+          <!-- What Does This Mean Section -->
+          <tr>
+            <td align="center" style="padding: 30px 40px 10px 40px; background-color: #f3e5f5;">
+              <p style="margin: 0; font-size: 18px; color: #333333; line-height: 1.6; text-align: center;">
+                <strong>¿Esto qué quiere decir?</strong>
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td align="center" style="padding: 10px 40px 30px 40px; background-color: #f3e5f5;">
+              <p style="margin: 0; font-size: 15px; color: #333333; line-height: 1.8; text-align: center;">
+                La lista de espera es para aquellas personas que quedaron seleccionadas pero que no podemos confirmar debido a la cantidad de lugares que hay en el aula. En caso de que alguno de los asistentes confirmados nos informe que no puede asistir el día del taller, <strong>nos pondremos en contacto contigo</strong> para confirmar tu asistencia.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Interest Confirmation -->
+          <tr>
+            <td align="center" style="padding: 20px 40px; background-color: #fff3e0;">
+              <p style="margin: 0; font-size: 15px; color: #333333; line-height: 1.8; text-align: center;">
+                <strong>Si aún tienes interés en participar, por favor responde a este email</strong>.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Communication Date -->
+          <tr>
+            <td align="center" style="padding: 20px 40px; background-color: #ffffff;">
+              <p style="margin: 0; font-size: 15px; color: #333333; line-height: 1.8; text-align: center;">
+                Finalmente, <strong>el {participant_confirmation_date} comunicaremos</strong> por email cuáles fueron las personas seleccionadas de la "Lista de Espera" que podrán participar del taller.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Start From Home Section -->
+          <tr>
+            <td align="center" style="padding: 30px 40px 10px 40px; background-color: #e3f2fd;">
+              <p style="margin: 0; font-size: 18px; color: #333333; line-height: 1.6; text-align: center;">
+                <strong>Mientras tanto, puedes empezar desde casa:</strong>
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td align="center" style="padding: 10px 40px 20px 40px; background-color: #e3f2fd;">
+              <p style="margin: 0; font-size: 15px; color: #333333; line-height: 1.8; text-align: center;">
+                También te animamos a realizar el taller desde tu casa, puedes encontrarlo en el <strong><a href="https://tutorial.djangogirls.org/es/" style="color: #ff9800; text-decoration: none;">siguiente link</a></strong> puedes seguir las pautas que dimos en un taller pasado
+              </p>
+            </td>
+          </tr>
+
+          <!-- Video Links -->
+          <tr>
+            <td align="center" style="padding: 10px 40px; background-color: #e3f2fd;">
+              <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: #333333; line-height: 1.8; text-align: left;">
+                <li style="margin: 5px 0;">
+                  <a href="https://www.youtube.com/watch?v=7JGJvuUo_l0" style="color: #ff9800; text-decoration: none;">Charla Bienvenida - Python</a>
+                </li>
+                <li style="margin: 5px 0;">
+                  <a href="https://www.youtube.com/watch?v=lkNCW831_dw" style="color: #ff9800; text-decoration: none;">Charla Django</a>
+                </li>
+              </ul>
+            </td>
+          </tr>
+
+          <!-- Slack Community -->
+          <tr>
+            <td align="center" style="padding: 20px 40px 30px 40px; background-color: #e3f2fd;">
+              <p style="margin: 0; font-size: 15px; color: #333333; line-height: 1.8; text-align: center;">
+                Además otra opción es que puedes publicar las dudas que tengas en el siguiente canal del <strong><a href="https://python-colombia.slack.com/" style="color: #ff9800; text-decoration: none;">Slack de Python Colombia (#djangogirls)</a></strong>, allí personas de la comunidad podrán ayudarte.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Additional Resources Section -->
+          <tr>
+            <td align="center" style="padding: 30px 40px 10px 40px; background-color: #ffffff;">
+              <p style="margin: 0; font-size: 18px; color: #333333; line-height: 1.6; text-align: center;">
+                <strong>Recursos adicionales para aprender:</strong>
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td align="center" style="padding: 10px 40px 30px 40px; background-color: #ffffff;">
+              <p style="margin: 0; font-size: 15px; color: #333333; line-height: 1.8; text-align: center;">
+                Si quieres aprender a programar en Python, te recomendamos visitar la sección <a href="https://argentinaenpython.com/quiero-aprender-python/" style="color: #ff9800; text-decoration: none;">"Quiero aprender Python"</a> del Proyecto Argentina en Python quien nos ha apoyado en la organización. Esta sección contiene material en Español e Inglés sobre Python desde nivel básico a avanzado.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Social Media Section -->
+          <tr>
+            <td align="center" style="padding: 20px 40px 10px 40px; background-color: #ffffff;">
+              <p style="margin: 0; font-size: 18px; color: #333333; line-height: 1.6; text-align: center;">
+                <strong>Síguenos en redes sociales:</strong>
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td align="center" style="padding: 10px 40px 10px 40px; background-color: #ffffff;">
+              <p style="margin: 0; font-size: 15px; color: #333333; line-height: 1.6; text-align: center;">
+                Además, te recomendamos que nos sigas en las redes sociales para estar al tanto de las últimas novedades sobre este taller y otros eventos de programación en Python que organizamos en diferentes ciudades.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Social Media Links -->
+          <tr>
+            <td align="center" style="padding: 10px 40px 30px 40px; background-color: #ffffff;">
+              <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: #333333; line-height: 1.8; text-align: left;">
+                <li style="margin: 5px 0;">
+                  Facebook: <a href="https://www.facebook.com/djangogirlsco/" style="color: #ff9800; text-decoration: none;">Django Girls Colombia</a>
+                </li>
+                <li style="margin: 5px 0;">
+                  Twitter: <a href="https://x.com/DjangoGirlsCo" style="color: #ff9800; text-decoration: none;">@DjangoGirlsCo</a>
+                </li>
+                <li style="margin: 5px 0;">
+                  Instagram: <a href="https://www.instagram.com/djangogirlsco/" style="color: #ff9800; text-decoration: none;">Djangogirlsco</a>
+                </li>
+                <li style="margin: 5px 0;">
+                  Telegram: <a href="https://t.me/djangogirlscolombia" style="color: #ff9800; text-decoration: none;">https://t.me/djangogirlscolombia</a>
+                </li>
+              </ul>
+            </td>
+          </tr>
+
+          <!-- Footer Section -->
+          <tr>
+            <td align="center" style="padding: 30px 40px; background-color: #f5f5f5; border-top: 3px solid #ff9800;">
+              <p style="margin: 0; font-size: 15px; color: #333333; line-height: 1.6; text-align: center;">
+                Muchas gracias,<br>
+                <strong>El equipo de organizadores.</strong>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+        <!-- End Email Content Container -->
+      </td>
+    </tr>
+  </table>
+  <!-- End Main Container -->
+</body>
+</html>

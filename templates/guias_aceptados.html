@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #f4f4f4;
+    }
+    table {
+      border-spacing: 0;
+      border-collapse: collapse;
+    }
+    img {
+      border: 0;
+      display: block;
+    }
+  </style>
+</head>
+<body style="margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; background-color: #f4f4f4;">
+  <!-- Main Container -->
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: #f4f4f4;">
+    <tr>
+      <td align="center" style="padding: 20px 0;">
+        <!-- Email Content Container -->
+        <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="background-color: #ffffff; max-width: 600px;">
+
+          <!-- Header Section: Image -->
+          <tr>
+            <td align="center" style="padding: 0;">
+              <img src="{email_header_url}" alt="Django Girls" style="width: 100%; max-width: 600px; height: auto; display: block;">
+            </td>
+          </tr>
+
+          <!-- Header Section: Title -->
+          <tr>
+            <td align="center" style="padding: 30px 20px 20px 20px; background-color: #ffffff;">
+              <h1 style="margin: 0; font-size: 28px; color: #ff6b6b; font-weight: bold;">¡Tu asistencia está ACEPTADA!</h1>
+            </td>
+          </tr>
+
+          <!-- Greeting Section -->
+          <tr>
+            <td align="center" style="padding: 10px 40px; background-color: #ffffff;">
+              <p style="margin: 0; font-size: 18px; color: #333333; line-height: 1.6;"><strong>¡Hola {mentor_name}!</strong></p>
+            </td>
+          </tr>
+
+          <!-- Summary Section -->
+          <tr>
+            <td align="center" style="padding: 20px 40px; background-color: #ffffff;">
+              <p style="margin: 0; font-size: 16px; color: #333333; line-height: 1.6; text-align: center;">
+                Te escribimos para comentarte que tu asistencia está <strong>ACEPTADA</strong> para participar en el evento "<strong>Taller de Programación para Mujeres en Bogotá</strong>" como <strong>GUÍA / COACH</strong>. ¡Muchísimas gracias! Este evento no podría ser posible sin tu ayuda.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Event Details Section -->
+          <tr>
+            <td align="center" style="padding: 20px 40px; background-color: #f9f9f9;">
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td align="left" style="padding: 8px 0;">
+                    <p style="margin: 0; font-size: 15px; color: #333333; line-height: 1.8;">
+                      <strong>Fecha:</strong> {workshop_date}
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="left" style="padding: 8px 0;">
+                    <p style="margin: 0; font-size: 15px; color: #333333; line-height: 1.8;">
+                      <strong>Hora:</strong> {workshop_time}
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="left" style="padding: 8px 0;">
+                    <p style="margin: 0; font-size: 15px; color: #333333; line-height: 1.8;">
+                      <strong>Lugar:</strong> {workshop_place}
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="left" style="padding: 8px 0;">
+                    <p style="margin: 0; font-size: 15px; color: #333333; line-height: 1.8;">
+                      <strong>Web:</strong> <a href="https://djangogirls.org/en/bogota/" style="color: #ff6b6b; text-decoration: none;">https://djangogirls.org/en/bogota/</a>
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Meeting Section -->
+          <tr>
+            <td align="center" style="padding: 30px 40px 10px 40px; background-color: #ffffff;">
+              <p style="margin: 0; font-size: 16px; color: #333333; line-height: 1.6; text-align: center;">
+                <strong>Es importante que nos reunamos previamente por videollamada en Meet,</strong> para explicar la dinámica del evento y cuál es el objetivo de ser guía en este taller.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Meeting Details -->
+          <tr>
+            <td align="center" style="padding: 20px 40px; background-color: #fff8e1;">
+              <p style="margin: 0; font-size: 15px; color: #333333; line-height: 1.8;">
+                <strong>Fecha de reunión por videollamada:</strong> {mentor_meeting_date}, a las {mentor_meeting_time}.
+                <strong>En el grupo de WhatsApp enviaremos el link de la llamada.</strong>
+              </p>
+            </td>
+          </tr>
+
+          <!-- Pre-reading Section -->
+          <tr>
+            <td align="center" style="padding: 20px 40px 10px 40px; background-color: #ffffff;">
+              <p style="margin: 0; font-size: 16px; color: #333333; line-height: 1.6; text-align: center;">
+                Te sugerimos que <strong>leas antes de la reunión</strong>
+              </p>
+            </td>
+          </tr>
+
+          <!-- Reading Materials -->
+          <tr>
+            <td align="center" style="padding: 10px 40px 20px 40px; background-color: #ffffff;">
+              <ul style="margin: 0; padding-left: 20px; font-size: 15px; color: #333333; line-height: 1.8; text-align: left;">
+                <li style="margin: 8px 0;">
+                  El <strong>Manual del Guía</strong> que <strong>Django Girls</strong> ha preparado para los guías así todos seguimos la misma dinámica para el evento: <a href="https://coach.djangogirls.org/" style="color: #ff6b6b; text-decoration: none;">https://coach.djangogirls.org/</a>
+                </li>
+                <li style="margin: 8px 0;">
+                  El <strong>Tutorial de Django Girls</strong> que utilizaremos para realizar el taller: <a href="https://tutorial.djangogirls.org/es/" style="color: #ff6b6b; text-decoration: none;">https://tutorial.djangogirls.org/es/</a>
+                </li>
+              </ul>
+            </td>
+          </tr>
+
+          <!-- WhatsApp Section -->
+          <tr>
+            <td align="center" style="padding: 30px 40px 10px 40px; background-color: #e8f5e9;">
+              <p style="margin: 0; font-size: 18px; color: #333333; line-height: 1.6; text-align: center;">
+                <strong>Comunicación Directa - Grupo de WhatsApp</strong>
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td align="center" style="padding: 10px 40px; background-color: #e8f5e9;">
+              <p style="margin: 0; font-size: 15px; color: #333333; line-height: 1.6; text-align: center;">
+                Hemos creado un grupo de WhatsApp para los guías aceptados al evento, por favor unirte al grupo siguiendo este link <em>desde tu celular</em>.
+              </p>
+            </td>
+          </tr>
+
+          <!-- WhatsApp Button -->
+          <tr>
+            <td align="center" style="padding: 20px 40px 30px 40px; background-color: #e8f5e9;">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td align="center" style="border-radius: 6px; background-color: #25D366;">
+                    <a href="https://chat.whatsapp.com/Gg99SDifbw9Ijo9OF2E5ME?mode=wwc" style="display: inline-block; padding: 14px 30px; font-size: 16px; color: #ffffff; text-decoration: none; font-weight: bold; border-radius: 6px;">
+                      Click para unirme al grupo de WhatsApp
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Important Recommendations Section -->
+          <tr>
+            <td align="center" style="padding: 30px 40px 10px 40px; background-color: #ffffff;">
+              <p style="margin: 0; font-size: 16px; color: #d32f2f; line-height: 1.6; text-align: center;">
+                <strong>¡No invitar a personas diferentes a las que está destinado este email!</strong>
+              </p>
+            </td>
+          </tr>
+
+          <!-- Day of Event Instructions -->
+          <tr>
+            <td align="center" style="padding: 20px 40px; background-color: #ffffff;">
+              <ul style="margin: 0; padding-left: 20px; font-size: 15px; color: #333333; line-height: 1.8; text-align: left;">
+                <li style="margin: 8px 0;">
+                  <strong>El día del evento es importante llegar una media hora antes de comenzar el evento</strong> (<strong>a las {workshop_day_mentor_meeting_time} será la reunión presencial de guías con el equipo de organizadores</strong>) así podemos conocernos en persona y conversar previamente para coordinar cómo será la jornada completa.
+                </li>
+                <li style="margin: 8px 0;">
+                  Ten en cuenta que la idea de ser guía es justamente ser eso: un guía, y no "hacer nosotros los ejercicios", sino ayudarlos a que lo completen ellos solos, motivándolos a investigar y resolver sus propios problemas a conciencia.
+                </li>
+              </ul>
+            </td>
+          </tr>
+
+          <!-- Confirmation Request -->
+          <tr>
+            <td align="center" style="padding: 20px 40px; background-color: #fff3e0;">
+              <p style="margin: 0; font-size: 15px; color: #333333; line-height: 1.8; text-align: center;">
+                Como último favor, te pedimos que <strong>contestes este email para confirmarnos que vas a asistir</strong> antes del <strong>{mentor_confirmation_deadline}</strong>.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Cannot Attend Notice -->
+          <tr>
+            <td align="center" style="padding: 20px 40px; background-color: #ffffff;">
+              <p style="margin: 0; font-size: 15px; color: #333333; line-height: 1.8; text-align: center;">
+                <strong>En caso de que tengas cualquier inconveniente y no puedas asistir al taller, envíanos un email.</strong>
+              </p>
+            </td>
+          </tr>
+
+          <!-- After Party -->
+          <tr>
+            <td align="center" style="padding: 20px 40px; background-color: #ffffff;">
+              <p style="margin: 0; font-size: 15px; color: #333333; line-height: 1.8; text-align: center;">
+                Al finalizar el evento <strong>iremos a tomar cerveza a algún lugar, así que reserva un espacio en tu agenda del Sábado a la noche.</strong>
+              </p>
+            </td>
+          </tr>
+
+          <!-- Social Media Section -->
+          <tr>
+            <td align="center" style="padding: 20px 40px 10px 40px; background-color: #ffffff;">
+              <p style="margin: 0; font-size: 15px; color: #333333; line-height: 1.6; text-align: center;">
+                Además, te recomendamos que nos sigas en las redes sociales para estar al tanto de las últimas novedades sobre este taller y otros eventos de programación en Python que organizamos:
+              </p>
+            </td>
+          </tr>
+
+          <!-- Social Media Links -->
+          <tr>
+            <td align="center" style="padding: 10px 40px 30px 40px; background-color: #ffffff;">
+              <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: #333333; line-height: 1.8; text-align: left;">
+                <li style="margin: 5px 0;">
+                  Facebook: <a href="https://www.facebook.com/djangogirlsco/" style="color: #ff6b6b; text-decoration: none;">Django Girls Colombia</a>
+                </li>
+                <li style="margin: 5px 0;">
+                  Twitter: <a href="https://x.com/DjangoGirlsCo" style="color: #ff6b6b; text-decoration: none;">@DjangoGirlsCo</a>
+                </li>
+                <li style="margin: 5px 0;">
+                  Instagram: <a href="https://www.instagram.com/djangogirlsco/" style="color: #ff6b6b; text-decoration: none;">Djangogirlsco</a>
+                </li>
+                <li style="margin: 5px 0;">
+                  Telegram: <a href="https://t.me/djangogirlscolombia" style="color: #ff6b6b; text-decoration: none;">https://t.me/djangogirlscolombia</a>
+                </li>
+              </ul>
+            </td>
+          </tr>
+
+          <!-- Footer Section -->
+          <tr>
+            <td align="center" style="padding: 30px 40px; background-color: #f5f5f5; border-top: 3px solid #ff6b6b;">
+              <p style="margin: 0; font-size: 15px; color: #333333; line-height: 1.6; text-align: center;">
+                Muchas gracias,<br>
+                <strong>El equipo de Organizadores.</strong>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+        <!-- End Email Content Container -->
+      </td>
+    </tr>
+  </table>
+  <!-- End Main Container -->
+</body>
+</html>

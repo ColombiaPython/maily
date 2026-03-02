@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+        }
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+        img {
+            border: 0;
+            display: block;
+        }
+
+        /* Default inline anchors color (match participantes_aceptados) */
+        a {
+            color: #ff6b6b;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #e0555a;
+            text-decoration: underline;
+        }
+
+        /* Button style only for anchors with class="btn" */
+        a.btn {
+            display: inline-block;
+            padding: 10px 16px;
+            background-color: #2aaa56; /* updated primary button color */
+            color: #ffffff !important;
+            text-decoration: none !important;
+            border-radius: 6px;
+            font-weight: bold;
+            margin: 4px 2px;
+        }
+
+        a.btn:hover {
+            background-color: #238f4a; /* slightly darker on hover */
+            color: #ffffff !important;
+        }
+
+        /* Inline anchors remain unstyled so they behave like normal text links */
+    </style>
+</head>
+    <body style="margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; background-color: #f4f4f4;">
+    <!-- Main Container -->
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: #f4f4f4;">
+        <tr>
+            <td align="center" style="padding: 20px 0;">
+                <!-- Email Content Container -->
+                <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="background-color: #ffffff; max-width: 600px;">
+
+                <!-- Header Section: Image -->
+                <tr>
+                    <td align="center" style="padding: 0;">
+                        <img src="{email_header_url}" alt="Django Girls Colombia" style="width: 100%; max-width: 600px; height: auto; display: block;">
+                    </td>
+                </tr>
+
+                <!-- Header Section: Title -->
+                <tr>
+                    <td align="center" style="padding: 30px 20px 20px 20px; background-color: #ffffff;">
+                        <h1 style="margin: 0; font-size: 28px; color: #2aaa56; font-weight: bold;">¡Muchas gracias!</h1>
+                    </td>
+                </tr>
+
+                <!-- Greeting Section -->
+                <tr>
+                    <td align="center" style="padding: 10px 40px; background-color: #ffffff;">
+                        <p style="margin: 0; font-size: 18px; color: #333333; line-height: 1.6;"><strong>¡Hola {participant_name}!</strong></p>
+                    </td>
+                </tr>
+
+                <!-- Message Content -->
+            <tr>
+                    <td align="left" style="padding: 20px 40px; background-color: #ffffff; color: #333333; font-size: 15px; line-height: 1.6;">
+                            <p>Queremos agradecerte enormemente por compartir un día entero con nosotros, por la energía que pusiste en el taller y las ganas de aprender. ¡Nosotros lo disfrutamos mucho! Y esperamos que tú también 🤗</p>
+
+                            <p>Además, nos gustaría recordarte algunas cosas y darte a conocer otras novedades. Hoy eres parte de Django Girls Colombia, únete a nuestras redes sociales:</p>
+
+                            <div style="text-align: center; margin: 18px 0;">
+                                <a class="btn" href="https://linktr.ee/djangogirlsco">Redes Sociales Django Girls Colombia</a>
+                            </div>
+
+                            <p>Te animamos a que compartas tu experiencia sobre el evento con el mundo entero; puedes escribir un párrafo o artículo (tus palabras pueden motivar a muchas mujeres) y enviárnoslo a <a href="mailto:djangogirlscolombia@gmail.com">djangogirlscolombia@gmail.com</a> para ser publicado en el <a href="http://blog.djangogirls.org/">Blog de Django Girls</a> o en el <a href="https://medium.com/@djangogirlscolombia">Medium de Django Girls Colombia</a>.</p>
+
+                            <p>Como organizadores, siempre tratamos de seguir mejorando y creciendo. Es por eso que hemos preparado una pequeña encuesta donde nos puedes contar todo lo que no te gustó del evento —¡también lo positivo!— ya que da fuerzas para seguir adelante.</p>
+
+                            <div style="text-align: center; margin: 18px 0;">
+                                <a class="btn" href="{survey_link}">Click Aquí para la Encuesta</a>
+                            </div>
+
+                            <p>Si llegaste a completar el taller, o lo terminaste en tu casa y quieres seguir adelante, puedes leer <a href="https://djangogirls.gitbooks.io/django-girls-tutorial-extensions/content/es/">Django Girls Tutorial: Extensions</a>.</p>
+
+                            <h2 style="font-size:18px; margin-top:18px;">Comunidades donde puedes seguir participando y aprendiendo:</h2>
+                            <ul>
+                                <li>A nivel nacional contamos con <a href="https://linktr.ee/colombiapython">Python Colombia</a>.</li>
+                                <li>También contamos con <a href="https://linktr.ee/pyladies_co">PyLadies Colombia</a>, comunidad enfocada en igualdad de género e inclusión.</li>
+                            </ul>
+
+                            <h2 style="font-size:18px; margin-top:18px;">¿Quieres ser embajadora en Bogotá?</h2>
+                            <p>Puedes unirte a Django Girls Colombia y ser la embajadora de Bogotá, tenemos pensado organizar muchos más talleres Django Girls en todo el país. Si estás interesada en ayudarnos/colaborar para que eso sea posible, puedes llenar en la encuesta la opción de quiero ayudar a organizar otro evento en mi ciudad.
+                            <br>
+                            <strong>¡No es necesario ser programador para colaborar en la gestión de nuevos eventos!</strong>
+                            </p>
+                            <p>
+                                Puedes ver todas las fotos del evento aquí:
+                            </p>
+
+                            <div style="text-align: center; margin: 18px 0;">
+                                <a class="btn" href="{photos_link}">Click Aquí para ver las fotos</a>
+                            </div>
+
+                            <p>Puedes compartir las fotos en tus redes sociales usando el hashtag <strong>#DjangoGirlsColombia</strong> <strong>#DjangoGirls</strong> <strong>#PythonColombia</strong> <strong>#PyLadiesColombia</strong>.</p>
+                            <p>A continuación te dejamos el link desde donde puedes descargar tu certificado:</p>
+                            <div style="text-align: center; margin: 18px 0;">
+                                <a class="btn" href="{certificate_url}">Link Certificado</a>
+                            </div>
+
+                        <p>Muchas gracias,<br>El equipo de organizadores.</p>
+                    </td>
+                </tr>
+
+                <!-- Footer -->
+                <tr>
+                    <td align="center" style="padding: 30px 40px; background-color: #f5f5f5; border-top: 3px solid #ff6b6b;">
+                        <p style="margin: 0; font-size: 14px; color: #333333;">Gracias por participar en Django Girls Colombia.</p>
+                    </td>
+                </tr>
+
+                </table>
+                <!-- End Email Content Container -->
+            </td>
+        </tr>
+    </table>
+    <!-- End Main Container -->
+    </body>
+</html>
