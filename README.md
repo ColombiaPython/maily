@@ -117,17 +117,17 @@ Templates are stored in the `templates/` directory:
 - `guias_aceptados.html` - Accepted mentors template
 - `guias_lista_espera.html` - Mentors waitlist template
 
-Templates use variables like `{participant_name}`, `{mentor_name}`, `{workshop_date}`, `{email_header_url}`, etc., which are automatically replaced with actual data.
+Templates use variables like `{participant_name}`, `{workshop_date}`, `{workshop_city}`, `{workshop_website_url}`, `{whatsapp_group_link}`, `{linktree_url}`, etc., which are automatically replaced with values from the constants in `main.py`.
 
 ## Configuration
 
-Workshop details and email settings are configured as constants in `main.py`:
+Workshop details and email settings are configured as constants at the top of `main.py`:
 
-- Workshop date, time, and location
-- Survey and photo links  
-- Email header image URL (`EMAIL_HEADER_URL`)
-- Confirmation deadlines
-- Email delay settings
+- **Workshop details:** date, time, location, city, year, website URL
+- **Mentor logistics:** meeting date/time, confirmation deadlines
+- **Participant logistics:** confirmation deadlines and dates
+- **Links:** survey, photos, email header image, Linktree, WhatsApp groups (separate for participants and mentors)
+- **Email settings:** sender email, delay between emails
 
 ## Security Note
 
