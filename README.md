@@ -22,7 +22,12 @@ The script includes a `--local` flag that generates HTML preview files instead o
 
 Create an OAuth2.0 token here: [Using OAuth 2.0 to Access Google APIs](https://developers.google.com/identity/protocols/oauth2)
 
-Store the credentials in a file called: `credentials.json`
+Copy the example file and fill in your real credentials:
+
+```bash
+cp credentials.example.json credentials.json
+# Edit credentials.json with your Google OAuth client_id and client_secret
+```
 
 ### 2. Environment Setup
 
@@ -58,7 +63,7 @@ Ensure your data files are properly formatted:
 ### Basic Syntax
 
 ```bash
-python main.py --type <message_type> [--local]
+python main.py --type <message_type> [--local] [--yes]
 ```
 
 ### Message Types
@@ -91,14 +96,17 @@ HTML preview files will be generated in the `output/` directory with names like:
 
 ### Sending Actual Emails
 
-Remove the `--local` flag to send real emails:
+Remove the `--local` flag to send real emails. The script will show a summary of recipients and ask for confirmation before sending:
 
 ```bash
-# Send certificate emails to all attendees
+# Send certificate emails to all attendees (will prompt for confirmation)
 python main.py --type certificate
 
-# Send acceptance emails to all mentors
+# Send acceptance emails to all mentors (will prompt for confirmation)
 python main.py --type accepted-mentors
+
+# Skip the confirmation prompt with --yes / -y
+python main.py --type accepted-mentors --yes
 ```
 
 ### Help
@@ -131,4 +139,4 @@ Workshop details and email settings are configured as constants at the top of `m
 
 ## Security Note
 
-Never commit `credentials.json` or `token.json` to version control. These files contain sensitive authentication information.
+Never commit `credentials.json`, `token.json`, or `data/*.csv` files to version control. These files contain sensitive authentication information and personal data. They are included in `.gitignore` by default.

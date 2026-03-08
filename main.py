@@ -1,6 +1,8 @@
 import os.path
 import base64
 import csv
+import re
+import sys
 import argparse
 from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
@@ -32,8 +34,7 @@ MENTOR_CONFIRMATION_DATE = "5 de julio de 2024" # Date when we will send accepta
 WORKSHOP_YEAR = "2026" # Year of the workshop, used in email templates and certificate generation
 
 # Email configuration constants
-DEFAULT_SUBJECT = "Django Girls Colombia - Información del Taller"
-IMAGE_PATH = None  # No local image file available, will embed when sending emails
+IMAGE_PATH = None  # Set to a file path to embed a local image as <embedded_image>; None skips attachment
 EMAIL_DELAY = 1  # Delay in seconds between emails
 
 # Template variable constants
@@ -66,15 +67,11 @@ def authenticate_gmail():
 
 
 def send_email(service, user_id, message):
-    try:
-        message = (
-            service.users().messages().send(userId=user_id, body=message).execute()
-        )
-        print(f"Message Id: {message['id']}")
-        return message
-    except Exception as error:
-        print(f"An error occurred: {error}")
-        return None
+    message = (
+        service.users().messages().send(userId=user_id, body=message).execute()
+    )
+    print(f"Message Id: {message['id']}")
+    return message
 
 
 def create_message(sender, to, subject, message_text, image_path):
@@ -107,8 +104,9 @@ def create_message(sender, to, subject, message_text, image_path):
 def read_csv(file_name):
     with open(file_name, mode="r", newline="", encoding="utf-8") as csv_file:
         csv_reader = csv.DictReader(csv_file)
-        data = [row for row in csv_reader]
+        data = list(csv_reader)
     return data
+
 
 def get_recipients(file_name):
     try:
@@ -116,9 +114,46 @@ def get_recipients(file_name):
     except FileNotFoundError:
         print(f"Error: CSV file '{file_name}' not found")
         return []
-    except Exception as e:
+    except csv.Error as e:
         print(f"Error reading CSV file: {e}")
         return []
+
+
+def load_and_validate_recipients(message_type):
+    is_mentor = "mentors" in message_type
+    file_name = "data/mentors.csv" if is_mentor else "data/attendees.csv"
+
+    recipients = get_recipients(file_name)
+    if not recipients:
+        print(f"No recipients found in '{file_name}'")
+        return [], []
+
+    # Validate required CSV columns
+    required_fields = {"email", "name"}
+    if message_type == "certificate":
+        required_fields.add("certificate_url")
+    missing = required_fields - recipients[0].keys()
+    if missing:
+        print(f"Error: CSV missing required columns: {missing}")
+        return [], []
+
+    valid, skipped = [], []
+    for row in recipients:
+        email = row.get("email", "").strip()
+        name = row.get("name", "").strip()
+        if not email or not name:
+            skipped.append(row)
+            continue
+        if message_type == "certificate" and not row.get("certificate_url", "").strip():
+            skipped.append(row)
+            continue
+        valid.append(row)
+
+    for s in skipped:
+        print(f"Warning: Skipping invalid row: {s}")
+
+    return valid, skipped
+
 
 def load_html_template(template_path, context):
     # Read template as-is. We intentionally avoid using str.format on the
@@ -137,32 +172,26 @@ def load_html_template(template_path, context):
     return template
 
 
-def send_bulk_message(service, template, message_type, subject, context_extras, local_mode=False):
+def send_bulk_message(service, template, message_type, subject, context_extras,
+                      local_mode=False, preloaded_recipients=None):
     is_mentor = "mentors" in message_type
-    file_name = "data/mentors.csv" if is_mentor else "data/attendees.csv"
     name_key = "mentor_name" if is_mentor else "participant_name"
 
-    recipients = get_recipients(file_name)
-    if not recipients:
-        print(f"No recipients found in '{file_name}'")
-        return 0
-
-    # Validate required CSV columns
-    required_fields = {"email", "name"}
-    if message_type == "certificate":
-        required_fields.add("certificate_url")
-    missing = required_fields - recipients[0].keys()
-    if missing:
-        print(f"Error: CSV missing required columns: {missing}")
-        return 0
+    if preloaded_recipients is not None:
+        recipients = preloaded_recipients
+    else:
+        recipients, _ = load_and_validate_recipients(message_type)
+        if not recipients:
+            return 0, []
 
     if local_mode:
         os.makedirs("output", exist_ok=True)
 
     sent_count = 0
+    failures = []
     for recipient in recipients:
-        receiver_email = recipient.get("email")
-        name = recipient.get("name")
+        receiver_email = recipient.get("email", "").strip()
+        name = recipient.get("name", "").strip()
 
         context = {
             name_key: name,
@@ -195,22 +224,25 @@ def send_bulk_message(service, template, message_type, subject, context_extras, 
         html_content = load_html_template(template, context)
 
         if local_mode:
-            safe_name = name.replace(" ", "_").replace("/", "_").replace("\\", "_")
+            safe_name = re.sub(r'[^\w\-]', '_', name)
             output_file = f"output/{message_type.replace('-', '_')}_{safe_name}.html"
             with open(output_file, "w", encoding="utf-8") as f:
                 f.write(html_content)
             print(f"Saved preview: {output_file}")
             sent_count += 1
         else:
-            message = create_message(
-                SENDER_EMAIL, receiver_email, subject, html_content, IMAGE_PATH
-            )
-            result = send_email(service, "me", message)
-            if result:
+            try:
+                message = create_message(
+                    SENDER_EMAIL, receiver_email, subject, html_content, IMAGE_PATH
+                )
+                send_email(service, "me", message)
                 sent_count += 1
+            except Exception as e:
+                print(f"Failed to send to {receiver_email}: {e}")
+                failures.append({"email": receiver_email, "name": name, "error": str(e)})
             sleep(EMAIL_DELAY)
 
-    return sent_count
+    return sent_count, failures
 
 
 def setup_argument_parser():
@@ -229,7 +261,13 @@ def setup_argument_parser():
         action="store_true",
         help="Run the script in local mode so it can be tested without sending emails"
     )
-    
+
+    parser.add_argument(
+        "--yes", "-y",
+        action="store_true",
+        help="Skip confirmation prompt and send emails immediately"
+    )
+
     return parser
 
 
@@ -262,7 +300,7 @@ def main():
     template = get_default_template(args.type)
     if not template or not os.path.exists(template):
         print(f"Error: Template file '{template}' not found")
-        return
+        sys.exit(1)
     
     # Authenticate and build the service (only if not in local mode)
     service = None
@@ -292,21 +330,53 @@ def main():
         "waitlist-mentors": {"mentor_confirmation_date": MENTOR_CONFIRMATION_DATE},
     }
 
+    # Load and validate recipients
+    recipients, skipped = load_and_validate_recipients(args.type)
+    if not recipients:
+        print("No valid recipients found. Exiting.")
+        sys.exit(1)
+
+    # Pre-send summary and confirmation (email mode only)
+    if not args.local:
+        print(f"\n--- Pre-send Summary ---")
+        print(f"Email type: {args.type}")
+        print(f"Recipients: {len(recipients)}")
+        if skipped:
+            print(f"Skipped rows: {len(skipped)}")
+        print("Addresses:")
+        for r in recipients:
+            print(f"  - {r.get('name')} <{r.get('email')}>")
+
+        if not args.yes:
+            confirm = input(f"\nSend {len(recipients)} emails? [y/N]: ").strip().lower()
+            if confirm != "y":
+                print("Aborted.")
+                sys.exit(0)
+
     sent_msgs = 0
+    failures = []
     try:
-        sent_msgs = send_bulk_message(
+        sent_msgs, failures = send_bulk_message(
             service, template, args.type,
             subject_map[args.type], extras_map[args.type],
-            args.local,
+            args.local, preloaded_recipients=recipients,
         )
     except Exception as e:
         print(f"Error processing messages: {e}")
-        return
-    
+        sys.exit(1)
+
+    if failures:
+        print(f"\n--- {len(failures)} FAILED recipients ---")
+        for f in failures:
+            print(f"  {f['email']} ({f['name']}): {f['error']}")
+
     if args.local:
-        print(f"✅ Finished generating {sent_msgs} preview HTML files of type '{args.type}'")
+        print(f"\nFinished generating {sent_msgs} preview HTML files of type '{args.type}'")
     else:
-        print(f"✅ Finished sending {sent_msgs} emails of type '{args.type}'")
+        print(f"\nFinished sending {sent_msgs} emails of type '{args.type}'")
+
+    if failures:
+        sys.exit(1)
 
 
 if __name__ == "__main__":
