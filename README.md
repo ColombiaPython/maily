@@ -120,10 +120,10 @@ python main.py --help
 Templates are stored in the `templates/` directory:
 
 - `certificate_template.html` - Certificate email template
-- `participantes_aceptados.html` - Accepted participants template
-- `participantes_lista_espera.html` - Participants waitlist template
-- `guias_aceptados.html` - Accepted mentors template
-- `guias_lista_espera.html` - Mentors waitlist template
+- `accepted_participants.html` - Accepted participants template
+- `waitlist_participants.html` - Participants waitlist template
+- `accepted_mentors.html` - Accepted mentors template
+- `waitlist_mentors.html` - Mentors waitlist template
 
 Templates use variables like `{participant_name}`, `{workshop_date}`, `{workshop_city}`, `{workshop_website_url}`, `{whatsapp_group_link}`, `{linktree_url}`, etc., which are automatically replaced with values from the constants in `main.py`.
 

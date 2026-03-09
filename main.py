@@ -275,10 +275,10 @@ def get_default_template(msg_type):
     """Get default template based on message type"""
     templates = {
         "certificate": "templates/certificate_template.html",
-        "accepted-participants": "templates/participantes_aceptados.html",
-        "waitlist-participants": "templates/participantes_lista_espera.html",
-        "accepted-mentors": "templates/guias_aceptados.html",
-        "waitlist-mentors": "templates/guias_lista_espera.html"
+        "accepted-participants": "templates/accepted_participants.html",
+        "waitlist-participants": "templates/waitlist_participants.html",
+        "accepted-mentors": "templates/accepted_mentors.html",
+        "waitlist-mentors": "templates/waitlist_mentors.html"
     }
     return templates.get(msg_type)
 
