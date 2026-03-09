@@ -41,7 +41,7 @@ EMAIL_DELAY = 1  # Delay in seconds between emails
 SURVEY_LINK = "https://forms.gle/mwjZZtbEaZRabbZ4A"
 PHOTOS_LINK = "https://drive.google.com/drive/folders/1g4EvKQsUqqzwVOtTNzM1M5ziGSHWzOEw?usp=sharing"
 CERTIFICATE_BASE_URL = "https://drive.google.com/file/"
-EMAIL_HEADER_URL = "https://i.imgur.com/866NcGI.png"
+EMAIL_HEADER_URL = "https://drive.google.com/thumbnail?id=1nlW_egqZzTNDdXPVk2bQdXK2lDMJp9Nf&sz=w1000"
 LINKTREE_URL = "https://linktr.ee/djangogirlsco"
 WHATSAPP_PARTICIPANTS_LINK = "https://chat.whatsapp.com/KwhazS6HFXnEmvyaaHc349?mode=wwc"
 WHATSAPP_MENTORS_LINK = "https://chat.whatsapp.com/Gg99SDifbw9Ijo9OF2E5ME?mode=wwc"
