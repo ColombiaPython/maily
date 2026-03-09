@@ -1,3 +1,4 @@
+import os
 import os.path
 import base64
 import csv
@@ -8,43 +9,68 @@ from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from time import sleep
+from dotenv import load_dotenv
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 
+load_dotenv()
+
+
+def _validate_env():
+    """Validate that all required environment variables are set."""
+    required = [
+        "SENDER_EMAIL",
+        "WORKSHOP_DATE", "WORKSHOP_TIME", "WORKSHOP_PLACE", "WORKSHOP_CITY",
+        "WORKSHOP_WEBSITE_URL", "WORKSHOP_YEAR",
+        "MENTOR_MEETING_DATE", "MENTOR_MEETING_TIME",
+        "WORKSHOP_DAY_MENTOR_MEETING_TIME",
+        "MENTOR_CONFIRMATION_DEADLINE", "MENTOR_CONFIRMATION_DATE",
+        "PARTICIPANT_CONFIRMATION_DEADLINE", "PARTICIPANT_CONFIRMATION_DATE",
+        "SURVEY_LINK", "PHOTOS_LINK", "CERTIFICATE_BASE_URL",
+        "EMAIL_HEADER_URL", "LINKTREE_URL",
+        "WHATSAPP_PARTICIPANTS_LINK", "WHATSAPP_MENTORS_LINK",
+    ]
+    missing = [v for v in required if os.getenv(v) is None]
+    if missing:
+        sys.exit(f"Missing required environment variables: {', '.join(missing)}")
+
+
+_validate_env()
+
 # If modifying these SCOPES, delete the file token.json.
 SCOPES = ["https://www.googleapis.com/auth/gmail.send"]
 
-SENDER_EMAIL = "djangogirlscolombia@gmail.com"
+SENDER_EMAIL = os.getenv("SENDER_EMAIL")
 
 # Workshop details constants
-WORKSHOP_DATE = "28 de marzo de 2026"
-WORKSHOP_TIME = "9:00 a.m. - 4:00 p.m."
-WORKSHOP_PLACE = "Evento Virtual"
-WORKSHOP_CITY = "Bogotá"
-WORKSHOP_WEBSITE_URL = "https://djangogirls.org/en/bogota/"
-MENTOR_MEETING_DATE = "15 de julio de 2024" # Date to meet with mentors before the workshop
-MENTOR_MEETING_TIME = "6:00 p.m. - 7:00 p.m." # Time for mentor meeting on the workshop day (e.g. for final instructions, Q&A, etc.)
-WORKSHOP_DAY_MENTOR_MEETING_TIME = "12:00 p.m." # Time for mentor meeting on the workshop day (e.g. for final instructions, Q&A, etc.)
-MENTOR_CONFIRMATION_DEADLINE = "30 de junio de 2024" # Deadline for mentors to confirm their participation before we finalize the list of accepted mentors and send out acceptance emails to participants
-PARTICIPANT_CONFIRMATION_DEADLINE = "5 de julio de 2024" # Deadline for participants to confirm their participation before we finalize the list of accepted participants and send out acceptance emails to mentors
-PARTICIPANT_CONFIRMATION_DATE = "10 de julio de 2024" # Date when we will send acceptance emails to participants after confirming the final list of accepted mentors
-MENTOR_CONFIRMATION_DATE = "5 de julio de 2024" # Date when we will send acceptance emails to mentors after confirming the final list of accepted mentors
-WORKSHOP_YEAR = "2026" # Year of the workshop, used in email templates and certificate generation
+WORKSHOP_DATE = os.getenv("WORKSHOP_DATE")
+WORKSHOP_TIME = os.getenv("WORKSHOP_TIME")
+WORKSHOP_PLACE = os.getenv("WORKSHOP_PLACE")
+WORKSHOP_CITY = os.getenv("WORKSHOP_CITY")
+WORKSHOP_WEBSITE_URL = os.getenv("WORKSHOP_WEBSITE_URL")
+MENTOR_MEETING_DATE = os.getenv("MENTOR_MEETING_DATE")
+MENTOR_MEETING_TIME = os.getenv("MENTOR_MEETING_TIME")
+WORKSHOP_DAY_MENTOR_MEETING_TIME = os.getenv("WORKSHOP_DAY_MENTOR_MEETING_TIME")
+MENTOR_CONFIRMATION_DEADLINE = os.getenv("MENTOR_CONFIRMATION_DEADLINE")
+PARTICIPANT_CONFIRMATION_DEADLINE = os.getenv("PARTICIPANT_CONFIRMATION_DEADLINE")
+PARTICIPANT_CONFIRMATION_DATE = os.getenv("PARTICIPANT_CONFIRMATION_DATE")
+MENTOR_CONFIRMATION_DATE = os.getenv("MENTOR_CONFIRMATION_DATE")
+WORKSHOP_YEAR = os.getenv("WORKSHOP_YEAR")
 
-# Email configuration constants
-IMAGE_PATH = None  # Set to a file path to embed a local image as <embedded_image>; None skips attachment
-EMAIL_DELAY = 1  # Delay in seconds between emails
+# Email configuration constants (optional, with defaults)
+IMAGE_PATH = os.getenv("IMAGE_PATH")  # Set to a file path to embed a local image as <embedded_image>; None skips attachment
+EMAIL_DELAY = int(os.getenv("EMAIL_DELAY", "1"))  # Delay in seconds between emails
 
 # Template variable constants
-SURVEY_LINK = "https://forms.gle/mwjZZtbEaZRabbZ4A"
-PHOTOS_LINK = "https://drive.google.com/drive/folders/1g4EvKQsUqqzwVOtTNzM1M5ziGSHWzOEw?usp=sharing"
-CERTIFICATE_BASE_URL = "https://drive.google.com/file/"
-EMAIL_HEADER_URL = "https://drive.google.com/thumbnail?id=1nlW_egqZzTNDdXPVk2bQdXK2lDMJp9Nf&sz=w1000"
-LINKTREE_URL = "https://linktr.ee/djangogirlsco"
-WHATSAPP_PARTICIPANTS_LINK = "https://chat.whatsapp.com/KwhazS6HFXnEmvyaaHc349?mode=wwc"
-WHATSAPP_MENTORS_LINK = "https://chat.whatsapp.com/Gg99SDifbw9Ijo9OF2E5ME?mode=wwc"
+SURVEY_LINK = os.getenv("SURVEY_LINK")
+PHOTOS_LINK = os.getenv("PHOTOS_LINK")
+CERTIFICATE_BASE_URL = os.getenv("CERTIFICATE_BASE_URL")
+EMAIL_HEADER_URL = os.getenv("EMAIL_HEADER_URL")
+LINKTREE_URL = os.getenv("LINKTREE_URL")
+WHATSAPP_PARTICIPANTS_LINK = os.getenv("WHATSAPP_PARTICIPANTS_LINK")
+WHATSAPP_MENTORS_LINK = os.getenv("WHATSAPP_MENTORS_LINK")
 
 
 def authenticate_gmail():

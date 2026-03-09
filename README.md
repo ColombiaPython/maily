@@ -51,7 +51,18 @@ env\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 4. Prepare Data Files
+### 4. Configure Environment Variables
+
+Copy the example environment file and update the values for your workshop:
+
+```bash
+cp .env.example .env
+# Edit .env with your workshop-specific values
+```
+
+The script validates that all required environment variables are set at startup. If any are missing, it exits with a clear error listing them. See `.env.example` for the full list of configurable values.
+
+### 5. Prepare Data Files
 
 Ensure your data files are properly formatted:
 
@@ -129,14 +140,16 @@ Templates use variables like `{participant_name}`, `{workshop_date}`, `{workshop
 
 ## Configuration
 
-Workshop details and email settings are configured as constants at the top of `main.py`:
+Workshop details and email settings are configured via environment variables (loaded from a `.env` file using [python-dotenv](https://github.com/theskumar/python-dotenv)). The script validates all required variables at startup and exits with an error if any are missing.
 
-- **Workshop details:** date, time, location, city, year, website URL
-- **Mentor logistics:** meeting date/time, confirmation deadlines
-- **Participant logistics:** confirmation deadlines and dates
-- **Links:** survey, photos, email header image, Linktree, WhatsApp groups (separate for participants and mentors)
-- **Email settings:** sender email, delay between emails
+Copy `.env.example` to `.env` and customize the values. Only `IMAGE_PATH` and `EMAIL_DELAY` are optional:
+
+- **Email:** `SENDER_EMAIL`, `EMAIL_DELAY`, `IMAGE_PATH`
+- **Workshop details:** `WORKSHOP_DATE`, `WORKSHOP_TIME`, `WORKSHOP_PLACE`, `WORKSHOP_CITY`, `WORKSHOP_YEAR`, `WORKSHOP_WEBSITE_URL`
+- **Mentor logistics:** `MENTOR_MEETING_DATE`, `MENTOR_MEETING_TIME`, `WORKSHOP_DAY_MENTOR_MEETING_TIME`, `MENTOR_CONFIRMATION_DEADLINE`, `MENTOR_CONFIRMATION_DATE`
+- **Participant logistics:** `PARTICIPANT_CONFIRMATION_DEADLINE`, `PARTICIPANT_CONFIRMATION_DATE`
+- **Links:** `SURVEY_LINK`, `PHOTOS_LINK`, `CERTIFICATE_BASE_URL`, `EMAIL_HEADER_URL`, `LINKTREE_URL`, `WHATSAPP_PARTICIPANTS_LINK`, `WHATSAPP_MENTORS_LINK`
 
 ## Security Note
 
-Never commit `credentials.json`, `token.json`, or `data/*.csv` files to version control. These files contain sensitive authentication information and personal data. They are included in `.gitignore` by default.
+Never commit `credentials.json`, `token.json`, `.env`, or `data/*.csv` files to version control. These files contain sensitive authentication information and personal data. They are included in `.gitignore` by default. Use `.env.example` as a reference template.
