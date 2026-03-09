@@ -189,6 +189,7 @@ def send_bulk_message(service, template, message_type, subject, context_extras,
 
     sent_count = 0
     failures = []
+    safe_name_counts = {}
     for recipient in recipients:
         receiver_email = recipient.get("email", "").strip()
         name = recipient.get("name", "").strip()
@@ -225,6 +226,9 @@ def send_bulk_message(service, template, message_type, subject, context_extras,
 
         if local_mode:
             safe_name = re.sub(r'[^\w\-]', '_', name)
+            safe_name_counts[safe_name] = safe_name_counts.get(safe_name, 0) + 1
+            if safe_name_counts[safe_name] > 1:
+                safe_name = f"{safe_name}_{safe_name_counts[safe_name]}"
             output_file = f"output/{message_type.replace('-', '_')}_{safe_name}.html"
             with open(output_file, "w", encoding="utf-8") as f:
                 f.write(html_content)
